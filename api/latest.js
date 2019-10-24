@@ -14,17 +14,18 @@ module.exports = (req, res) => {
                     <guid>${ md5(item) }</guid>
                 </item>
             `;
-
-            const rss = `
-                <?xml version="1.0" encoding="UTF-8" ?>
-                <rss version="2.0">
-                    <channel>
-                        <ttl>30</ttl>
-                        ${ items.join('') }
-                    </channel>
-                </rss>
-            `;
         });
+
+        const rss = `
+            <?xml version="1.0" encoding="UTF-8" ?>
+            <rss version="2.0">
+                <channel>
+                    <ttl>30</ttl>
+                    ${ items.join('') }
+                </channel>
+            </rss>
+        `;
+
         res.setHeader('Cache-Control', 's-maxage=3600');
         res.setHeader('Content-Type', 'application/rss+xml');
         res.status(200);
